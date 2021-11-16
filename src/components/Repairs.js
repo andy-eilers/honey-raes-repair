@@ -3,6 +3,7 @@ import React from "react"
 //no ".js" needed in React
 import { CustomerList } from "./customers/CustomerList";
 import { EmployeeList } from "./employees/EmployeeList";
+import { TicketList } from "./serviceTickets/TicketList";
 //exporting Repairs to browser in HTML
 export const Repairs = () => {
     return (
@@ -10,10 +11,13 @@ export const Repairs = () => {
         are encapsulated in one fragmented element*/
         <>
         <h1>Honey Rae's Repair Shop</h1>
+        
         <h2>Customer List</h2>
         <CustomerList />
         <h2>Employee List</h2>
         <EmployeeList />
+        <h2>Service Tickets</h2>
+        <TicketList />
         </>
     )
 }

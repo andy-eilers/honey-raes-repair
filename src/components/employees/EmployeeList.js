@@ -1,29 +1,43 @@
 import React, { useEffect, useState } from "react"
-//Declaring EmployeeList function
+
 export const EmployeeList = () => {
-    const [employees, setEmployees] = useState([])
-    // Event Listener to track changes in state to customer array
+    const [employees, changeEmployee] = useState([])
+    const [specialties, setSpecial] = useState("")
+
     useEffect(
         () => {
-            fetch("http://localhost:8088/customers")
-            .then(res =>res.json())
-            .then((employeeArray) => {
-                setEmployees(employeeArray)
-            })
+            fetch("http://localhost:8088/employees")
+                .then(res => res.json())
+                .then((data) => {
+                    changeEmployee(data)
+                })
         },
         []
     )
-    //map to list customer array
+
+    useEffect(
+        () => {
+            const justSpecialties = employees.map(employee => employee.specialty)
+            setSpecial(justSpecialties.join(", "))
+        /*
+            1. Use .map() to get the specialty of each employee
+            2. Then update a state variable to be a comma-separated string
+                (e.g. "iPhone, Printers, ...")
+        */
+    }, [employees])
+
     return (
         <>
-        {
-            employees.map(
-                (employeeObject) => {
-                    return <div key={`employee--${employeeObject.id}`}>{employeeObject.name}</div>
-
-                }
-            )
-        }
+            <div>
+                Specialties: { specialties }
+            </div>
+            {
+                employees.map(
+                    (employee) => {
+                        return <p key={`employee--${employee.id}`}>{employee.name}</p>
+                    }
+                )
+            }
         </>
     )
 }
