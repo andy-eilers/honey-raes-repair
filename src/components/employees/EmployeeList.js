@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 
 export const EmployeeList = () => {
     const [employees, changeEmployee] = useState([])
-    const [specialties, setSpecial] = useState("")
+
+    const history = useHistory()
 
     useEffect(
         () => {
@@ -15,21 +17,10 @@ export const EmployeeList = () => {
         []
     )
 
-    useEffect(
-        () => {
-            const justSpecialties = employees.map(employee => employee.specialty)
-            setSpecial(justSpecialties.join(", "))
-        /*
-            1. Use .map() to get the specialty of each employee
-            2. Then update a state variable to be a comma-separated string
-                (e.g. "iPhone, Printers, ...")
-        */
-    }, [employees])
-
     return (
         <>
             <div>
-                Specialties: { specialties }
+                <button onClick={() => history.push("/employees/hire")}>Hire Employee</button>
             </div>
             {
                 employees.map(

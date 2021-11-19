@@ -62,7 +62,12 @@ export const TicketForm = () => {
                         onChange={
                             (event) => {
                                 const copy = { ...ticket }
-                                copy.emergency = event.target.value
+                                if (event.target.value === "on") {
+                                    copy.emergency = true                       
+                                    
+                                } else {
+                                    copy.emergency = false
+                                }
                                 console.log(event.target.value)
                                 updateTicket(copy)
                             }
